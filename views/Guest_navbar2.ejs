@@ -1,0 +1,104 @@
+<%- include('header_files')%>   
+<link rel="stylesheet" href="../stylesheets/guest_navbar.css">
+
+<video autoplay loop muted play-inline class="bg-video" id="vid">
+    <source src="../video/vd2.mp4" type="video/mp4">
+</video>
+
+<div class="navdiv">
+    <nav class="navbar na"  >
+        <ul class=" navbar mx-lg-auto mx-md-5 mx-sm-4 logo">
+            <li><a href="/users"><img src='../images/logo1.png' ></a></li>
+        </ul>
+
+    <form id="searchbar" class="navbar mx-lg-auto">
+    <input  type="text" name="search" placeholder="Search..." for >
+    <img src="../images/search.png">
+</form>
+
+<ul class="navbar  outsidenav" id="outnav">
+
+  <ul class="navbar  outsidenav" id="outnav">
+    <li class="nav-item dropdown">
+      <a class='nav-link dropdown-toggle active' href='#' id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-user"></i> Settings</a>
+    
+    <ul class="dropdown-menu drops" aria-labelledby="navbarDropdown" style="background-color:black">
+      <!-- <li> <a class='dropdown-item' href='/admin-login'>My Profile</a></li> -->
+      <li> <a class='dropdown-item' href='/user-orders'>My Orders</a></li>
+      <!-- <li>
+        <hr class="dropdown divider">
+      </li> -->
+      <li><a class="dropdown-item" href="/users/change-password">Change Password</a></li>
+      <!-- <li>
+        <hr class="dropdown divider">
+      </li> -->
+      <li>
+        <a onclick="return confirm('Are you Sure to Logout?')"
+        class="dropdown-item" href="/users/user-logout">Logout</a>
+      </li>
+    </ul>
+    <li class="nav-item  "><a class='nav-link' href="/shopping-cart"><i class="fa fa-shopping-cart"></i>Cart</a></li>
+    <li class="nav-item "><img src="../images/menu.png" class='hamburger' id ='ham' height="50px" onclick="openmenu()"></a></li>
+</ul>
+
+<ul class='navbar nav-btns' id="menu">
+    <li class="nav-item " ><a class='nav-link'href='/users'>Home</a></li>
+    <li class="nav-item  "><a class='nav-link' href='/Contact-Us'>Contact</a></li>
+    <li class="nav-item  "><a class='nav-link' href='/About-us'>About Us</a></li>
+    <img class="cross-icon" id="cross" src="../images/cross2.png" width="60px" onclick="closemenu()">
+</ul>
+
+
+</nav>
+    </div>
+    <div class="insidetxt1" id="intxt">
+        <h2>My Gadget Warehouse. My Gadget Warehouse. My Gadget Warehouse.My Gadget Warehouse.My Gadget Warehouse. </h2>
+    </div>    
+    <div class="insidetxt2" id="intxt2">
+        <h2>My Gadget Warehouse. My Gadget Warehouse. My Gadget Warehouse.My Gadget Warehouse.My Gadget Warehouse. </h2>
+    </div>
+
+
+
+</div>
+
+</div>
+</div>
+
+
+
+
+
+
+    <script>
+
+
+function closemenu(){
+document.getElementById('menu').style.display='none';
+
+document.getElementById('cross').style.display='none';
+document.getElementById('intxt').style.display='none';
+document.getElementById('intxt2').style.display='none';
+document.body.style.overflow = 'visible';
+document.getElementById('vid').style.display='none';
+// document.getElementById('fronttxt').style.display='flex';   
+// document.getElementById('ci').style.display='flex';   
+
+}
+
+function openmenu(){
+  document.getElementById('menu').style.display='flex';
+  document.getElementById('cross').style.display='flex';
+  document.getElementById('intxt').style.display='flex';
+  
+  document.getElementById('intxt2').style.display='flex';
+  document.body.style.overflow = 'hidden';
+  
+  document.getElementById('vid').style.display='flex';
+  
+  // document.getElementById('fonttxt').style.display='flex';
+  // document.getElementById('ci').style.display='none';
+
+} 
+    </script>

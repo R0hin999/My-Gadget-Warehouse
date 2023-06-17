@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptops</title>
+    <%- include('header_files')%>
+    <style>
+        ::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ffffff4e;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+}
+
+    </style>
+    <!-- <link href="stylesheets/Smartphone.css" rel="stylesheet"> -->
+</head>
+<body onload="getSpeakers()">
+    <%- include('Guest_navbar2')%>
+    <div class="container">
+        <h2 class="text-center">Latest Products</h2>
+        <div class="dropdown text-end">
+            <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Filter
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a onclick='getSpeakers()' class="dropdown-item text-light" href="#">Default</a></li>
+                <li><a onclick='getBluetoothS()'class="dropdown-item text-light" href="#">Bluetooth Speakers</a></li>
+                <li><a onclick='getWiredS()' class="dropdown-item text-light" href="#">Wired Speakers</a></li>
+  
+              <!-- <li><a class="dropdown-item text-light" href="#">Something else here</a></li> -->
+            </ul>
+          </div>
+        <hr>
+    </div>
+    <div class="container py-5">
+    <div class="row py-5" id="ProductsDiv">
+
+    </div>
+    </div>
+
+    <%- include('footer_script')%>
+
+    <script>
+      var AddtoCart=(object)=>{
+        // console.log(object);
+         var formData= new FormData();
+         formData.append("action","add");
+         formData.append("productObject",JSON.stringify(object));
+
+
+        var http= new XMLHttpRequest();
+        http.onreadystatechange=function(){
+        if(this.readyState==4 && this.status==200){
+            console.log(this.response);
+
+        if (this.response=="success"){
+            Swal.fire({
+                icon:"success",
+                title:"Product has been added"
+            });
+        }else{
+            Swal.fire({
+                icon:"warning",
+                title:"Product Already in your Cart"
+            })
+        }
+        }
+      }
+      http.open("POST","/add-to-cart",true);
+      http.send(formData);
+    };
+
+
+       
+
+        var getSpeakers = () => {
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(JSON.parse(this.response));
+                    var Products = JSON.parse(this.response);
+                    var cardsHtml =``;
+                    Products.forEach(value => {
+                    cardsHtml += `<div class="col-lg-4 text-center">`;
+                    cardsHtml += `<div class="card mb-5" style='background-color:rgba(255, 255, 255, 0.1)'>`;
+                     cardsHtml+=`<img src='${value.photo}' alt=''>`;
+                    cardsHtml += `<div class="card-body" >`;
+                    cardsHtml += `<h5>${value.product_name}</h5>`;
+                    var disprice =value.price -(value.price*value.discount)/100;
+                    cardsHtml+=`<span class='text-success mx-3'>&#x20b9;${Math.round(disprice)}</span>`;
+                    cardsHtml += `<del class='text-danger '>&#x20b9;${value.price}</del>`;
+                    // cardsHtml+=`<span class=''>${value.discount}%</span>`;
+                    cardsHtml+='<button onclick=\'AddtoCart('+ JSON.stringify(value) +')\' type="button" class="btn btn-outline-light mx-3">Add to Cart <i class="fa fa-shopping-cart"></i></button>';
+
+                    cardsHtml += `</div>`;
+                    cardsHtml += `</div>`;
+                    cardsHtml += `</div>`;
+                    });
+
+                document.getElementById('ProductsDiv').innerHTML=cardsHtml;
+
+                }
+            }
+            http.open('GET', '/get-Speakers', true);
+            http.send();
+        }
+        var getBluetoothS = () => {
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(JSON.parse(this.response));
+                    var Products = JSON.parse(this.response);
+                    var cardsHtml =``;
+                    Products.forEach(value => {
+                    cardsHtml += `<div class="col-lg-4 text-center">`;
+                    cardsHtml += `<div class="card mb-5" style='background-color:rgba(255, 255, 255, 0.1)'>`;
+                     cardsHtml+=`<img src='${value.photo}' alt=''>`;
+                    cardsHtml += `<div class="card-body" >`;
+                    cardsHtml += `<h5>${value.product_name}</h5>`;
+                    var disprice =value.price -(value.price*value.discount)/100;
+                    cardsHtml+=`<span class='text-success mx-3'>&#x20b9;${Math.round(disprice)}</span>`;
+                    cardsHtml += `<del class='text-danger '>&#x20b9;${value.price}</del>`;
+                    // cardsHtml+=`<span class=''>${value.discount}%</span>`;
+                    cardsHtml+='<button onclick=\'AddtoCart('+ JSON.stringify(value) +')\' type="button" class="btn btn-outline-light mx-3">Add to Cart <i class="fa fa-shopping-cart"></i></button>';
+
+                    cardsHtml += `</div>`;
+                    cardsHtml += `</div>`;
+                    cardsHtml += `</div>`;
+                    });
+
+                document.getElementById('ProductsDiv').innerHTML=cardsHtml;
+
+                }
+            }
+            http.open('GET', '/get-BluetoothS', true);
+            http.send();
+        }
+        var getWiredS = () => {
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(JSON.parse(this.response));
+                    var Products = JSON.parse(this.response);
+                    var cardsHtml =``;
+                    Products.forEach(value => {
+                    cardsHtml += `<div class="col-lg-4 text-center">`;
+                    cardsHtml += `<div class="card mb-5" style='background-color:rgba(255, 255, 255, 0.1)'>`;
+                     cardsHtml+=`<img src='${value.photo}' alt=''>`;
+                    cardsHtml += `<div class="card-body" >`;
+                    cardsHtml += `<h5>${value.product_name}</h5>`;
+                    var disprice =value.price -(value.price*value.discount)/100;
+                    cardsHtml+=`<span class='text-success mx-3'>&#x20b9;${Math.round(disprice)}</span>`;
+                    cardsHtml += `<del class='text-danger '>&#x20b9;${value.price}</del>`;
+                    // cardsHtml+=`<span class=''>${value.discount}%</span>`;
+                    cardsHtml+='<button onclick=\'AddtoCart('+ JSON.stringify(value) +')\' type="button" class="btn btn-outline-light mx-3">Add to Cart <i class="fa fa-shopping-cart"></i></button>';
+
+                    cardsHtml += `</div>`;
+                    cardsHtml += `</div>`;
+                    cardsHtml += `</div>`;
+                    });
+
+                document.getElementById('ProductsDiv').innerHTML=cardsHtml;
+
+                }
+            }
+            http.open('GET', '/get-WiredS', true);
+            http.send();
+        }
+
+    </script>
+</body>
+</html>

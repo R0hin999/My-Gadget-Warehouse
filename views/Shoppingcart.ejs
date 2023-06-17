@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <%- include('header_files')%>
+</head>
+<body onload="GetCartPro()">
+
+
+    <%- include('Guest_navbar2')%>
+    <%- include('footer_script')%>
+    <div class="container">
+        <div class="text-center">
+            <h2 class="mb-3 py-2 text-light">
+                Shopping Cart
+            </h2>
+            <table class="table table-bordered  table-dark text-light table-hover text-center ">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Product Names</th>
+                        <th>Price</th>
+                        <th>Discount</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody id="ShoppingCart"></tbody>
+            </table>
+            
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        var GetCartPro = () => {
+            var formData = new FormData();
+            formData.append("action", "getproducts");
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(this.response=="");
+                    console.log(this.response);
+                    // if (this.response.length <=0) {
+                    if (this.response == "") {
+                        document.getElementById('ShoppingCart').innerHTML = "<tr><td colspan='6' class='text-danger'><h4>EMPTY</h4></td></tr>";
+
+                    } else {
+                        // console.log(JSON.parse(this.response));
+                        var cart = JSON.parse(this.response);
+                        var tbodyHTML = ``;
+                        var grandtotal = 0;
+                        cart.forEach((value, index) => {
+                            tbodyHTML += `<tr>`;
+                            tbodyHTML += `<td>${index + 1}</td>`;
+                            tbodyHTML += `<td>`;
+                            tbodyHTML += `<img src="${value.photo}"alt="" width='50px'>`;
+                            tbodyHTML += `${value.product_name}`;
+                            tbodyHTML += `</td>`;
+                            tbodyHTML += `<td>&#x20b9;${value.price}</td>`;
+                            tbodyHTML += `<td>${value.discount}</td>`;
+
+                            tbodyHTML += `<td>`;
+                            tbodyHTML += `<button type="button" onclick="UpdateQuantity('plus',${value.id})" class="btn btn-sm btn-info"><i class="fa fa-add"></i></button>`;
+                            tbodyHTML += `<span class='mx-3'>${value.quantity}</span>`;
+                            tbodyHTML += `<button type="button" onclick="UpdateQuantity('minus',${value.id})" class="btn btn-sm btn-danger"><i class="fa fa-minus"></i></button>`;
+                            grandtotal += value.quantity * value.disprice;
+                            tbodyHTML += `</td>`;
+                            tbodyHTML += `<td>&#x20b9;${value.quantity * value.disprice}</td>`;
+
+                            tbodyHTML += `<td>`;
+                            tbodyHTML += `<button type="button" onclick="RemoveProduct(${value.id})" class="btn btn-sm btn-outline-danger"><i class="fa fa-times"></i></button>`;
+
+
+                            tbodyHTML += `</td>`;
+                            tbodyHTML += `</tr>`;
+
+                        });
+                        tbodyHTML += `<tr>`;
+                        tbodyHTML += `<td colspan='5'></td>`;
+                        tbodyHTML += `<td>Grand Total : &#x20b9;${grandtotal}</td>`;
+                        tbodyHTML += `</tr>`;
+
+
+                        tbodyHTML += `<tr>`;
+                        tbodyHTML += `<td colspan='5'></td>`;
+                        tbodyHTML += `<td>`;
+                        tbodyHTML += `<a href='/check-user-session' class='btn btn-outline-light'>Proceed To Checkout</a>`;
+                        tbodyHTML += `</td>`;
+                        tbodyHTML += `</tr>`;
+
+                        document.getElementById("ShoppingCart").innerHTML = tbodyHTML;
+                    }
+                }
+            }
+            http.open("POST", "/add-to-cart", true);
+            http.send(formData);
+        };
+        var UpdateQuantity = (action, pid) => {
+            // console.log(action,pid);
+            var formData = new FormData();
+            formData.append("action", action);
+            formData.append("pid", pid);
+
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.response);
+                    if (this.response == "updated") {
+                        GetCartPro();
+
+                    }
+                }
+            }
+            http.open("POST", '/add-to-cart', true);
+            http.send(formData);
+        }
+        var RemoveProduct = (pid) => {
+            if (confirm("Are you Sure")) {
+                var formData = new FormData();
+                formData.append("action", "remove");
+                formData.append("pid", pid);
+
+                var http = new XMLHttpRequest();
+                http.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // console.log(this.response);
+                        if (this.response == "Removed") {
+                            GetCartPro();
+                        }
+                    }
+                }
+                http.open("post", '/add-to-cart', true);
+                http.send(formData);
+
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('header_files')%>
+    <link rel="stylesheet" href="stylesheets/user_Signup.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<script type="text/javascript">
+    (function() {
+
+        emailjs.init('3DWtqUkf693gOZO9G');
+    })();
+</script>
+
+<style>
+    .container{
+        margin-top: 50px;
+    
+    };
+
+    
+    .inputBox::placeholder{
+        font-family: Inter;
+        color: aliceblue;
+    }
+</style>
+<body>
+    <%- include('Guest_navbar2')%>
+    
+    <div class="container py-4 form w-50">
+        <div class="card-header">
+            <h2 class="text-light text-center mb-5">Contact us</h2>
+        </div>
+        <div class="card-body ">
+            <form id="ContactUsForm">
+                <div class="row">
+                    <div class="col-md-12 mb-3 inputBox">
+                        <label for="Name"> Name</label>
+                        <input type="text" id="Name" name="Name" class="form-control" autocomplete="nope">
+                    </div>
+
+                    <div class="col-md-12 mb-3 inputBox">
+                        <label for="username">Email</label>
+                        <input type="email" autocomplete="new-password" id="email"  name="email" class="form-control" >
+                    </div>
+
+                    <!-- <div class="col-md-12 mb-3 inputBox">
+                        <label for="phonno"> Phone no.</label>
+                        <input type="text" id="phonno" autocomplete="nope" name="phonno" class="form-control">
+                    </div> -->
+                 
+                    <div class="col-md-12 mb-3 inputBox">
+                        <!-- <label for="confirmpass"></label> -->
+                     <textarea id="msg"style='font-family:"Inter"' placeholder="How can we help you?" autocomplete="nope" class="form-control p-3" name='msg' rows='4'></textarea>
+                    </div>
+                    <div class="col-md-12 mb-3 inputBox">
+                        <!-- <button  onclick="SendMail()"class="btn rounded-pill btn-outline-light text-end px-4">Send</button> -->
+                        <input type="submit" value="Send">
+                    </div>
+            </form>
+        </div>
+        <script src="https://smtpjs.com/v3/smtp.js" ></script>
+    <%- include('footer_script')%>
+<!-- <script>
+    function SendMail()={
+        var params={
+            from_name:document.getElementById("name")value,
+            email:document.getElementById('email').value,
+            message:document.getElementById('msg').value       
+        }
+        emailjs.send("service_we43oaq","template_r4ukwsf",params).
+        then(function(res){
+            alert("Success!" + res.status);
+        })
+    }
+</script> -->
+<script type="text/javascript">
+    window.onload = function() {
+        document.getElementById('ContactUsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var params={
+            from_name:document.getElementById('Name').value,
+            email_id:document.getElementById('email').value,
+            message:document.getElementById('msg').value       
+        }
+            // generate a five digit number for the contact_number variable
+            // this.contact_number.value = Math.random() * 100000 | 0;
+            // these IDs from the previous steps
+            emailjs.send("service_we43oaq","template_r4ukwsf",params);
+            
+                Swal.fire({
+                icon:"success",
+                title:"Message sent Successfully"
+            }) 
+            document.getElementById("ContactUsForm").reset();
+        });
+    }
+</script>
+</body>
+</html>

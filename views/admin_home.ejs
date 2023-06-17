@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home</title>
+    <%- include('header_files')%>
+    <style>
+        body {
+            background-color: black;
+        }
+        .dropdown-toggle:hover{
+            background-color: transparent;
+            border-color: transparent;
+        }
+.dr{
+color: white;
+
+        } 
+h2 span{
+    transition: 0.6s;
+}      
+h2:hover{
+    margin-right: 10px;
+}  
+h2:hover span{
+    margin-left: 10px;
+}
+h2:hover span{
+    color: white;
+    text-shadow: 0 0 10px #fff,
+                 0 0 10px #fff;
+
+}
+
+        
+    </style>
+
+</head>
+<body>
+    <%- include('navbar')%>
+<div class="container py-5 text-center">
+    <h2 style="color:rgba(240, 248, 255, 0.354)">Welcome <span class="name"><%= name%></span></h2>
+</div>
+    <%- include('footer_script')%>
+</body>
+</html>

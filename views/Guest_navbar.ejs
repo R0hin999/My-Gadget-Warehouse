@@ -1,0 +1,189 @@
+<%- include('header_files')%>   
+<link rel="stylesheet" href="stylesheets/guest_navbar.css">
+
+<video autoplay loop muted play-inline class="bg-video" id="vid">
+    <source src="video/vd2.mp4" type="video/mp4">
+</video>
+
+<div class="navdiv">
+    <nav class="navbar na"  >
+        <ul class=" navbar mx-lg-auto mx-md-5 mx-sm-4 logo">
+            <li><a href="/"><img src='images/logo1.png' ></a></li>
+        </ul>
+
+    <form id="searchbar" class="navbar mx-lg-auto">
+    <input  type="text" name="search" placeholder="Search..." for >
+    <img src="images/search.png">
+</form>
+
+<ul class="navbar  outsidenav" id="outnav">
+    <li class="nav-item " ><a class='nav-link'href='/User-login'>Login</a></li>
+    <li class="nav-item  "><a class='nav-link' href='/User-Signup'>Sign Up</a></li>
+    <li class="nav-item "><img src="images/menu.png" class='hamburger' id ='ham' height="50px" onclick="openmenu()"></a></li>
+</ul>
+
+<ul class='navbar nav-btns' id="menu">
+    <li class="nav-item " ><a class='nav-link'href='/'>Home</a></li>
+    <li class="nav-item  "><a class='nav-link' href='/Contact-Us'>Contact</a></li>
+    <li class="nav-item  "><a class='nav-link' href='/About-us'>About Us</a></li>
+    <img class="cross-icon" id="cross" src="images/cross2.png" width="60px" onclick="closemenu()">
+</ul>
+
+
+</nav>
+    </div>
+    <div class="insidetxt1" id="intxt">
+        <h2>My Gadget Warehouse. My Gadget Warehouse. My Gadget Warehouse.My Gadget Warehouse.My Gadget Warehouse. </h2>
+    </div>    
+    <div class="insidetxt2" id="intxt2">
+        <h2>My Gadget Warehouse. My Gadget Warehouse. My Gadget Warehouse.My Gadget Warehouse.My Gadget Warehouse. </h2>
+    </div>
+
+
+
+
+
+
+
+
+ 
+
+
+
+<!-- <footer
+      class="text-center text-lg-start text-white"
+      >
+<section
+         class="d-flex justify-content-between p-4 foot">
+  <div class="me-5">
+    <span>Get connected with us </span>
+  </div>
+  <div>
+    <a href="" class="text-white me-4">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="" class="text-white me-4">
+      <i class="fab fa-twitter"></i>
+    </a>
+    <a href="" class="text-white me-4">
+      <i class="fab fa-google"></i>
+    </a>
+    <a href="" class="text-white me-4">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="" class="text-white me-4">
+      <i class="fab fa-linkedin"></i>
+    </a>
+  </div>
+</section>
+
+<section class="">
+  <div class="container text-center text-md-start mt-5">
+
+    <div class="row mt-3">
+
+      <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+        <h6 class="text-uppercase fw-bold">My Gadget Warehouse</h6>
+        <hr
+            class="mb-4 mt-0 d-inline-block mx-auto"
+            style="width: 60px; background-color: #fffffff9; height: 2px"
+            />
+        <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet laborum perspiciatis quos at maiores nostrum vel vitae soluta fugiat harum.
+        </p>
+      </div>
+
+
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+      
+        <h6 class="text-uppercase fw-bold">Links</h6>
+        <hr
+            class="mb-4 mt-0 d-inline-block mx-auto"
+            style="width: 60px; background-color: #fffffff9; height: 2px"
+            />
+        <p>
+          <a href="Index.html" class="text-white">Home</a>
+        </p>
+        <p>
+          <a href="#!" class="text-white">Your profile</a>
+        </p>
+        <p>
+          <a href="#!" class="text-white">Contact us</a>
+        </p>
+        <p>
+          <a href="#!" class="text-white">Help</a>
+        </p>
+      </div>
+      
+
+      
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+      
+        <h6 class="text-uppercase fw-bold">Contact</h6>
+        <hr
+            class="mb-4 mt-0 d-inline-block mx-auto"
+            style="width: 60px; background-color: #fffffff9; height: 2px"
+            />
+        <p><i class="fas fa-home mr-3"></i> Ranjit Avenue, B-Block,Amritsar,India</p>
+        <p><i class="fas fa-envelope mr-3"></i> Mygw9999@gmail.com</p>
+        <p><i class="fas fa-phone mr-3"></i> 1234567890</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<div
+     class="text-center p-3 copy"
+
+     >
+  © 2022 Copyright :
+  <a class="text-white" href="Index.html"
+     >My Gadget Warehouse</a
+    >
+</div>
+</footer> -->
+
+</div>
+
+</div>
+</div>
+
+
+
+
+
+
+    <script>
+
+
+function closemenu(){
+document.getElementById('menu').style.display='none';
+
+document.getElementById('cross').style.display='none';
+document.getElementById('intxt').style.display='none';
+document.getElementById('intxt2').style.display='none';
+document.body.style.overflow = 'visible';
+document.getElementById('vid').style.display='none';
+document.getElementById('fronttxt').style.display='flex';   
+document.getElementById('ci').style.display='flex';   
+
+}
+
+function openmenu(){
+  document.getElementById('menu').style.display='flex';
+  document.getElementById('cross').style.display='flex';
+  document.getElementById('intxt').style.display='flex';
+  
+  document.getElementById('intxt2').style.display='flex';
+  document.body.style.overflow = 'hidden';
+  
+  document.getElementById('vid').style.display='flex';
+  
+  document.getElementById('fonttxt').style.display='flex';
+  document.getElementById('ci').style.display='none';
+
+} 
+    </script>
